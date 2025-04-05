@@ -14,6 +14,6 @@ router.beforeEach((to, from, next) => {
       return
     }
   }
-  message.success('跳转成功')
+  // message.success('跳转成功')
   next()
 })

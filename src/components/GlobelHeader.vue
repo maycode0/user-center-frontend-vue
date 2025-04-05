@@ -3,11 +3,7 @@
     <a-row :wrap="false">
       <a-col flex="150px">
         <div class="title-bar">
-          <img
-            class="logo"
-            src="../assets/logo.png"
-            alt="logo"
-          />
+          <img class="logo" src="../assets/logo.png" alt="logo" />
           <div class="title">用户中心</div>
         </div></a-col
       >
@@ -20,9 +16,12 @@
       /></a-col>
       <a-col flex="100px">
         <div class="user-login-status">
-          <a-button type="primary" href="/user/login"
-            >登录</a-button
-          >
+          <div v-if="loginUserStore.loginUser.id">
+            {{ loginUserStore.loginUser.username }}
+          </div>
+          <div v-else>
+            <a-button type="primary" href="/user/login">登录</a-button>
+          </div>
         </div></a-col
       >
     </a-row>
@@ -30,13 +29,11 @@
 </template>
 <script lang="ts" setup>
 import { h, ref } from 'vue'
-import {
-  CrownOutlined,
-  HomeOutlined,
-} from '@ant-design/icons-vue'
+import { CrownOutlined, HomeOutlined } from '@ant-design/icons-vue'
 import type { MenuProps } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
-
+import { useLoginUserStore } from '@/stores/useLoginUserStore'
+const loginUserStore = useLoginUserStore()
 const router = useRouter()
 
 // 点击菜单实现路由跳转

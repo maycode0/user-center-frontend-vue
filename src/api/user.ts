@@ -18,7 +18,7 @@ export const userRegister = async (params: unknown) => {
  */
 export const userLogin = async (params: unknown) => {
   return myAxios.request({
-    url: '/api/user/login',
+    url: 'http://localhost:3000/api/user/login',
     method: 'POST',
     data: params,
   })
@@ -33,6 +33,9 @@ export const userLogout = async (params: unknown) => {
     url: '/api/user/logout',
     method: 'POST',
     data: params,
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
 }
 

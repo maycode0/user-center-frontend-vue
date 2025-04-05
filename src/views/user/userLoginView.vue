@@ -39,21 +39,19 @@
           },
         ]"
       >
-        <a-input-password
-          v-model:value="formState.password"
-        />
+        <a-input-password v-model:value="formState.password" />
       </a-form-item>
 
       <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
-        <a-button type="primary" html-type="submit"
-          >登录</a-button
-        >
+        <a-button type="primary" html-type="submit">登录</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script lang="ts" setup>
+// import { useLoginUserStore } from '@/stores/useLoginUserStore'
+import { userLogin } from '@/api/user'
 import { useLoginUserStore } from '@/stores/useLoginUserStore'
 import { message } from 'ant-design-vue'
 import { reactive } from 'vue'
@@ -62,13 +60,11 @@ import { useRouter } from 'vue-router'
 interface FormState {
   username: string
   password: string
-  remember: boolean
 }
 
 const formState = reactive<FormState>({
   username: '',
   password: '',
-  remember: true,
 })
 
 // 引入用户全局状态store
@@ -76,16 +72,20 @@ const loginUserStore = useLoginUserStore()
 
 // 引用路由
 const router = useRouter()
-const onFinish = (values: unknown) => {
-  const res = { code: 0, data: 'success' }
-
-  if (res.code == 0 && res.data == 'success') {
-    console.log('Success:', values)
+const onFinish = async () => {
+  const res = await userLogin(formState)
+  if (res.data.code === 0 && res.data.data) {
+    await loginUserStore.fetchLoginUser()
+    console.log('进来了啊啊啊啊')
     message.success('登录成功')
     router.push({
       path: '/',
       replace: true,
     })
+  } else if (res.data.code === 1) {
+    message.error('未注册用户')
+  } else {
+    message.error('密码错误')
   }
 }
 
