@@ -28,11 +28,11 @@ export const userLogin = async (params: unknown) => {
  * 用户注销
  * @param params
  */
-export const userLogout = async (params: unknown) => {
+export const userLogout = async () => {
   return myAxios.request({
     url: '/api/user/logout',
     method: 'POST',
-    data: params,
+    // data: params,
     headers: {
       'Content-Type': 'application/json',
     },

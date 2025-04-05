@@ -14,13 +14,20 @@
           :items="items"
           @click="doMenuClick"
       /></a-col>
-      <a-col flex="100px">
+      <a-col flex="150px">
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
             {{ loginUserStore.loginUser.username }}
+            <a-button
+              type="primary"
+              danger
+              @click="doQuit"
+              style="margin-left: 10px"
+              >退出</a-button
+            >
           </div>
           <div v-else>
-            <a-button type="primary" href="/user/login">登录</a-button>
+            <a-button type="primary" @click="doLogin">登录</a-button>
           </div>
         </div></a-col
       >
@@ -33,9 +40,24 @@ import { CrownOutlined, HomeOutlined } from '@ant-design/icons-vue'
 import type { MenuProps } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore'
+import { userLogout } from '@/api/user'
 const loginUserStore = useLoginUserStore()
 const router = useRouter()
-
+const doLogin = () => {
+  router.push({
+    path: '/user/login',
+  })
+}
+const doQuit = () => {
+  userLogout()
+  loginUserStore.loginUser = {
+    username: '未登录',
+    id: null,
+  }
+  router.push({
+    path: '/user/login',
+  })
+}
 // 点击菜单实现路由跳转
 const doMenuClick = ({ key }: { key: string }) => {
   router.push({ path: key })
@@ -95,5 +117,9 @@ const items = ref<MenuProps['items']>([
 
 .logo {
   height: 48px;
+}
+:deep(.user-login-status) {
+  display: flex;
+  flex-grow: 1;
 }
 </style>
