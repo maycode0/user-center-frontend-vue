@@ -1,4 +1,4 @@
-import myAxios from '@/request'
+import myAxios from '@/utils/request'
 
 /**
  * 用户注册
@@ -44,7 +44,7 @@ export const userLogout = async (params: unknown) => {
  */
 export const getCurrentUser = async () => {
   return myAxios.request({
-    url: '/api/user/current',
+    url: 'http://localhost:3000/api/user/current',
     method: 'GET',
   })
 }

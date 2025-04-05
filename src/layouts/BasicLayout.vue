@@ -10,7 +10,7 @@
 
       <a-layout-footer class="footer">
         <a href="https://www.baidu.com" target="_blank">
-          编程导航 by May
+          一站式用户管理中心 by May
         </a>
       </a-layout-footer></a-layout
     >

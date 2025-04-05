@@ -76,7 +76,7 @@ const onFinish = async () => {
   const res = await userLogin(formState)
   if (res.data.code === 0 && res.data.data) {
     await loginUserStore.fetchLoginUser()
-    console.log('进来了啊啊啊啊')
+    console.log(loginUserStore.loginUser)
     message.success('登录成功')
     router.push({
       path: '/',

@@ -1,7 +1,17 @@
+// 二次封装axios
 import axios from 'axios'
+import envConfig from '@/configs/index'
+
+// 定义接口返回数据的统一格式
+// interface ResponseData<T = any> {
+//   code: number
+//   message: string
+//   data: T
+//   success: boolean
+// }
 
 const myAxios = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: envConfig.apiBaseUrl,
   timeout: 10000,
   withCredentials: true,
 })
@@ -23,10 +33,9 @@ myAxios.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // 对响应数据做点什么
-    console.log(response)
-
+    // console.log(response)
     const { data } = response
-    console.log(data)
+    // console.log(data)
     // 未登录
     if (data.code === 40100) {
       // 不是获取用户信息接口，或者不是登录页面，则跳转到登录页面
