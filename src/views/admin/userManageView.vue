@@ -19,16 +19,12 @@
       </template>
 
       <template #bodyCell="{ column, record }">
+        <!-- 暂未使用 -->
         <template v-if="column.dataIndex === 'avatarUrl'">
-          <a-image
-            :src="record.avatarUrl"
-            :width="120"
-          ></a-image>
+          <a-image :src="record.avatarUrl" :width="120"></a-image>
         </template>
-        <template
-          v-else-if="column.dataIndex === 'userRole'"
-        >
-          <div v-if="record.dataIndex == 0">
+        <template v-else-if="column.dataIndex === 'userRole'">
+          <div v-if="record.userRole === 0">
             <a-tag color="green">管理员</a-tag>
           </div>
           <div v-else>
@@ -36,18 +32,10 @@
           </div>
         </template>
         <template v-else-if="column.dataIndex === 'action'">
-          <a-button danger @click="doDelete(record.id)"
-            >删除</a-button
-          >
+          <a-button danger @click="doDelete(record.id)">删除</a-button>
         </template>
-        <template
-          v-else-if="column.dataIndex === 'createTime'"
-        >
-          {{
-            dayjs(record.createTime).format(
-              'YYYY-MM-DD HH:mm:ss'
-            )
-          }}
+        <template v-else-if="column.dataIndex === 'createTime'">
+          {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
         </template>
       </template>
     </a-table>
@@ -73,10 +61,6 @@ const columns = [
   {
     title: '账号',
     dataIndex: 'userAccount',
-  },
-  {
-    title: '头像',
-    dataIndex: 'avatarUrl',
   },
   {
     title: '性别',

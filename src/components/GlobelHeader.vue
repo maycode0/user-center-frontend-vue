@@ -19,8 +19,16 @@
           <div v-if="loginUserStore.loginUser.id">
             {{ loginUserStore.loginUser.username }}
             <a-button
+              v-if="loginUserStore.loginUser.userRole === 0"
               type="primary"
               danger
+              @click="doQuit"
+              style="margin-left: 10px"
+              >退出</a-button
+            >
+            <a-button
+              v-if="loginUserStore.loginUser.userRole === 1"
+              type="primary"
               @click="doQuit"
               style="margin-left: 10px"
               >退出</a-button
@@ -52,7 +60,6 @@ const doQuit = () => {
   userLogout()
   loginUserStore.loginUser = {
     username: '未登录',
-    id: null,
   }
   router.push({
     path: '/user/login',
@@ -68,7 +75,7 @@ router.afterEach((to) => {
 const current = ref<string[]>(['home'])
 const items = ref<MenuProps['items']>([
   {
-    key: '/',
+    key: '/user/home',
     icon: () => h(HomeOutlined),
     label: '主页',
     title: '主页',
@@ -97,9 +104,9 @@ const items = ref<MenuProps['items']>([
         href: 'https://www.codefather.cn',
         target: '_blank',
       },
-      '编程导航'
+      'Vue官方文档'
     ),
-    title: '编程导航',
+    title: 'Vue官方文档',
   },
 ])
 </script>

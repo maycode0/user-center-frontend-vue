@@ -1,31 +1,27 @@
-import UserManageView from '@/views/admin/userManageView.vue'
-import HomeView from '@/views/HomeView.vue'
-import UserLoginView from '@/views/user/userLoginView.vue'
-import UserRegisterView from '@/views/user/userRegisterView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/user/home',
       name: 'home',
-      component: HomeView,
+      component: import('@/views/common/HomeView.vue'),
     },
     {
       path: '/user/login',
       name: 'userLogin',
-      component: UserLoginView,
+      component: import('@/views/user/userLoginView.vue'),
     },
     {
       path: '/user/register',
       name: 'userRegiste',
-      component: UserRegisterView,
+      component: import('@/views/user/userRegisterView.vue'),
     },
     {
       path: '/admin/userManage',
       name: 'adminUserManag',
-      component: UserManageView,
+      component: import('@/views/admin/userManageView.vue'),
     },
   ],
 })

@@ -1,5 +1,11 @@
 import myAxios from '@/utils/request'
 
+// 登录表单数据接口
+interface FormState {
+  username: string
+  password: string
+}
+
 /**
  * 用户注册
  * @param params
@@ -16,7 +22,8 @@ export const userRegister = async (params: unknown) => {
  * 用户登录
  * @param params
  */
-export const userLogin = async (params: unknown) => {
+export const userLogin = async (params: FormState) => {
+  console.log(`用户尝试登录表单数据 : ${params}`)
   return myAxios.request({
     url: 'http://localhost:3000/api/user/login',
     method: 'POST',
@@ -32,7 +39,6 @@ export const userLogout = async () => {
   return myAxios.request({
     url: '/api/user/logout',
     method: 'POST',
-    // data: params,
     headers: {
       'Content-Type': 'application/json',
     },

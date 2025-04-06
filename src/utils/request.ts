@@ -31,11 +31,8 @@ myAxios.interceptors.request.use(
 // 添加响应拦截器
 myAxios.interceptors.response.use(
   function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
     // 对响应数据做点什么
-    // console.log(response)
     const { data } = response
-    // console.log(data)
     // 未登录
     if (data.code === 40100) {
       // 不是获取用户信息接口，或者不是登录页面，则跳转到登录页面
@@ -49,7 +46,6 @@ myAxios.interceptors.response.use(
     return response
   },
   function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
     // 对响应错误做点什么
     return Promise.reject(error)
   }
